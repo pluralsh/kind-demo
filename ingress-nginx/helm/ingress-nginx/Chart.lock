@@ -1,0 +1,6 @@
+dependencies:
+- name: ingress-nginx
+  repository: cm://app.plural.sh/cm/ingress-nginx
+  version: 0.1.9
+digest: sha256:380c3f42bde53a8adb9d5e83f9113b8a42b3bea31bee7d0b4bba70756b9c74fc
+generated: "2022-03-31T17:36:38.477849391+02:00"
