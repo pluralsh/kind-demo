@@ -1,0 +1,6 @@
+dependencies:
+- name: airflow
+  repository: cm://app.plural.sh/cm/airflow
+  version: 0.3.15
+digest: sha256:72fa1ece36793738c6bbd5a952f6dbe26c61d98f98ccb40315a533cd5e8f0d23
+generated: "2022-03-31T17:48:59.203657932+02:00"

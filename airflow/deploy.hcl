@@ -1,11 +1,11 @@
 metadata {
-  path = "etcd"
+  path = "airflow"
   name = "deploy"
 }
 
 step "terraform-init" {
-  wkdir   = "etcd/terraform"
-  target  = "etcd/terraform"
+  wkdir   = "airflow/terraform"
+  target  = "airflow/terraform"
   command = "terraform"
 
   args = [
@@ -13,13 +13,13 @@ step "terraform-init" {
     "-upgrade",
   ]
 
-  sha     = "h1:k5CdD8Vlr0me3PG+iS+YV3s5yGdzm7w69qKb+FF6f0c="
+  sha     = "h1:BCKpzQm8z/KNN8NK2FpF+KlXzKPKF7P/XlZKK5jksX0="
   retries = 0
 }
 
 step "terraform-apply" {
-  wkdir   = "etcd/terraform"
-  target  = "etcd/terraform"
+  wkdir   = "airflow/terraform"
+  target  = "airflow/terraform"
   command = "terraform"
 
   args = [
@@ -27,28 +27,28 @@ step "terraform-apply" {
     "-auto-approve",
   ]
 
-  sha     = "h1:k5CdD8Vlr0me3PG+iS+YV3s5yGdzm7w69qKb+FF6f0c="
+  sha     = "h1:BCKpzQm8z/KNN8NK2FpF+KlXzKPKF7P/XlZKK5jksX0="
   retries = 1
 }
 
 step "terraform-output" {
-  wkdir   = "etcd"
-  target  = "etcd/terraform"
+  wkdir   = "airflow"
+  target  = "airflow/terraform"
   command = "plural"
 
   args = [
     "output",
     "terraform",
-    "etcd",
+    "airflow",
   ]
 
-  sha     = "h1:k5CdD8Vlr0me3PG+iS+YV3s5yGdzm7w69qKb+FF6f0c="
+  sha     = "h1:BCKpzQm8z/KNN8NK2FpF+KlXzKPKF7P/XlZKK5jksX0="
   retries = 0
 }
 
 step "kube-init" {
-  wkdir   = "etcd"
-  target  = "etcd/.plural/NONCE"
+  wkdir   = "airflow"
+  target  = "airflow/.plural/NONCE"
   command = "plural"
 
   args = [
@@ -56,19 +56,19 @@ step "kube-init" {
     "kube-init",
   ]
 
-  sha     = "b5057257352a02cd92c8749b36ec0d6d1b87ade85b7322a797cb7dc9b800c8fe"
+  sha     = "4bc3007fc1040809aafe42fc75d653c419656fb4fd08ab5a40b4e95592da3ece"
   retries = 0
 }
 
 step "crds" {
-  wkdir   = "etcd"
-  target  = "etcd/crds"
+  wkdir   = "airflow"
+  target  = "airflow/crds"
   command = "plural"
 
   args = [
     "wkspace",
     "crds",
-    "etcd",
+    "airflow",
   ]
 
   sha     = "h1:47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU="
@@ -76,16 +76,16 @@ step "crds" {
 }
 
 step "bounce" {
-  wkdir   = "etcd"
-  target  = "etcd/helm"
+  wkdir   = "airflow"
+  target  = "airflow/helm"
   command = "plural"
 
   args = [
     "wkspace",
     "helm",
-    "etcd",
+    "airflow",
   ]
 
-  sha     = "h1:kp4q8nxPc4tOMHfaOev/siivU5cGkI8REDHfU6LnugQ="
+  sha     = "h1:BaDFGPyvxtFm0Wvz3eBDlpX731b4YTZQjidTkXuFyE4="
   retries = 1
 }
